@@ -1,0 +1,838 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Continuum - Encyclopedia of Mythology, Religion & Spirituality</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Georgia', serif;
+            background: #d4c4b0;
+            color: #2b2622;
+            line-height: 1.6;
+        }
+
+        /* ==================== NAVBAR ==================== */
+        .navbar {
+            background: #3d3530;
+            padding: 1.5rem 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #d9c2a2;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .navbar-brand:hover {
+            color: #e8d4b8;
+        }
+
+        .nav-tabs {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .nav-tab {
+            background: transparent;
+            border: 1px solid #a89968;
+            color: #a89968;
+            padding: 0.6rem 1.2rem;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+        }
+
+        .nav-tab:hover {
+            background: rgba(168, 153, 104, 0.1);
+        }
+
+        .nav-tab.active {
+            background: #a89968;
+            color: #3d3530;
+            font-weight: bold;
+        }
+
+        /* ==================== MAIN CONTAINER ==================== */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        /* ==================== PAGES ==================== */
+        .page {
+            display: none;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        /* HOME PAGE */
+        .home-page {
+            text-align: center;
+        }
+
+        .home-page h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: #2b2622;
+        }
+
+        .home-page p {
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            color: #5a5047;
+        }
+
+        .home-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .home-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .home-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        .home-card h2 {
+            color: #a89968;
+            margin-bottom: 0.5rem;
+        }
+
+        .home-card p {
+            color: #6b6560;
+            font-size: 0.95rem;
+        }
+
+        /* SECTION PAGE */
+        .section-page {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .section-page h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            color: #2b2622;
+        }
+
+        .section-page > p {
+            color: #6b6560;
+            margin-bottom: 2rem;
+        }
+
+        .category-switcher {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e0d5c7;
+        }
+
+        .category-btn {
+            background: none;
+            border: none;
+            color: #a89968;
+            cursor: pointer;
+            padding: 0.5rem 1rem;
+            transition: all 0.3s;
+            font-family: 'Georgia', serif;
+            font-size: 1rem;
+        }
+
+        .category-btn:hover {
+            color: #d9c2a2;
+        }
+
+        .category-btn.active {
+            font-weight: bold;
+            color: #d9c2a2;
+            border-bottom: 2px solid #a89968;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .category-card {
+            background: white;
+            border: 1px solid #e0d5c7;
+            padding: 1.5rem;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .category-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transform: translateY(-2px);
+        }
+
+        .category-card h3 {
+            color: #2b2622;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .category-card .overview {
+            color: #6b6560;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .category-card .meta {
+            color: #a89968;
+            font-size: 0.85rem;
+        }
+
+        /* DETAIL PAGE */
+        .detail-page {
+            background: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .detail-header {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #e0d5c7;
+        }
+
+        .detail-header h1 {
+            font-size: 2.2rem;
+            color: #2b2622;
+            margin-bottom: 0.5rem;
+        }
+
+        .detail-header p {
+            color: #6b6560;
+            font-size: 1rem;
+        }
+
+        .detail-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .detail-section {
+            padding: 1.5rem;
+            background: #f9f6f0;
+            border-radius: 6px;
+            grid-column: 1 / -1;
+        }
+
+        .detail-section h3 {
+            color: #a89968;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .detail-section p,
+        .detail-section ul {
+            color: #5a5047;
+            line-height: 1.8;
+        }
+
+        .detail-section ul {
+            margin-left: 1.5rem;
+        }
+
+        .detail-section li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* COLLAPSIBLE SECTIONS */
+        .collapsible-header {
+            background: #e8dcc8;
+            border: none;
+            color: #2b2622;
+            padding: 1rem 1.5rem;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 4px;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+            font-family: 'Georgia', serif;
+        }
+
+        .collapsible-header:hover {
+            background: #dcc9b3;
+        }
+
+        .collapsible-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        .collapsible-content.active {
+            max-height: 2000px;
+        }
+
+        .toggle-icon {
+            display: inline-block;
+            transition: transform 0.3s;
+        }
+
+        .collapsible-header.collapsed .toggle-icon {
+            transform: rotate(-90deg);
+        }
+
+        /* EMPTY STATE */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 1rem;
+        }
+
+        .empty-state p {
+            color: #6b6560;
+            font-size: 1.1rem;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 1rem;
+            }
+
+            .nav-tabs {
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .home-page h1 {
+                font-size: 2rem;
+            }
+
+            .category-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .detail-content {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVBAR -->
+    <div class="navbar">
+        <div class="navbar-brand" onclick="goHome()">The Continuum</div>
+        <div class="nav-tabs">
+            <button class="nav-tab active" onclick="goToSection('mythology')">Mythologies</button>
+            <button class="nav-tab" onclick="goToSection('religion')">Religions</button>
+            <button class="nav-tab" onclick="goToSection('worldview')">Worldviews</button>
+            <button class="nav-tab" onclick="goToSection('spirituality')">Spirituality</button>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER -->
+    <div class="container">
+        <!-- HOME PAGE -->
+        <div id="homePage" class="page active">
+            <div class="home-page">
+                <h1>The Continuum</h1>
+                <p>Explore mythology, religion, worldviews, and spiritual practices from around the world</p>
+                <div class="home-cards">
+                    <div class="home-card" onclick="goToSection('mythology')">
+                        <h2>Mythologies</h2>
+                        <p>Stories of gods, goddesses, and supernatural beings from ancient cultures</p>
+                    </div>
+                    <div class="home-card" onclick="goToSection('religion')">
+                        <h2>Religions</h2>
+                        <p>Living faith systems with active followers who believe and practice their teachings</p>
+                    </div>
+                    <div class="home-card" onclick="goToSection('worldview')">
+                        <h2>Worldviews</h2>
+                        <p>Philosophical frameworks for understanding reality and human existence</p>
+                    </div>
+                    <div class="home-card" onclick="goToSection('spirituality')">
+                        <h2>Spirituality</h2>
+                        <p>Spiritual practices and belief systems connecting to the sacred and transcendent</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MYTHOLOGY PAGE -->
+        <div id="mythologyPage" class="page"></div>
+
+        <!-- RELIGION PAGE -->
+        <div id="religionPage" class="page"></div>
+
+        <!-- WORLDVIEW PAGE -->
+        <div id="worldviewPage" class="page"></div>
+
+        <!-- SPIRITUALITY PAGE -->
+        <div id="spiritualityPage" class="page"></div>
+
+        <!-- DETAIL PAGE -->
+        <div id="detailPage" class="page"></div>
+    </div>
+
+    <script>
+        // ==================== STATE MANAGEMENT ====================
+        let data = {};
+        let currentSection = null;
+        let currentCategory = null;
+        let currentEntity = null;
+        let allDeities = {};
+
+        // ==================== DATA LOADING ====================
+        async function loadData() {
+            const paths = [
+                'mythologies.json',
+                './mythologies.json',
+                '/mythologies.json',
+                window.location.origin + '/mythologies-of-the-world/mythologies.json'
+            ];
+
+            for (const path of paths) {
+                try {
+                    const response = await fetch(path);
+                    if (response.ok) {
+                        data = await response.json();
+                        window.data = data;
+                        buildDeityIndex();
+                        renderSections();
+                        return;
+                    }
+                } catch (error) {
+                    // Try next path
+                }
+            }
+
+            // If all fail, show error
+            document.querySelector('.container').innerHTML = `
+                <div class="empty-state">
+                    <p>❌ Error loading database - make sure mythologies.json is in the same directory</p>
+                </div>
+            `;
+        }
+
+        // ==================== DEITY INDEXING ====================
+        function buildDeityIndex() {
+            for (const [mythKey, myth] of Object.entries(data.mythologies)) {
+                if (myth.deities) {
+                    for (const deity of myth.deities) {
+                        allDeities[deity.id] = { ...deity, mythologyKey: mythKey, mythology: myth.name };
+                    }
+                }
+            }
+        }
+
+        // ==================== SECTION RENDERING ====================
+        function renderSections() {
+            // Mythology
+            renderMythologyPage();
+
+            // Religion
+            renderReligionPage();
+
+            // Worldview
+            renderWorldviewPage();
+
+            // Spirituality
+            renderSpiritualityPage();
+        }
+
+        function renderMythologyPage() {
+            const page = document.getElementById('mythologyPage');
+            const categories = Object.keys(data.mythologies);
+            
+            let html = `
+                <div class="section-page">
+                    <h1>Mythologies</h1>
+                    <p>Explore mythological systems from around the world</p>
+                    <div class="category-switcher">
+                        ${categories.map(cat => `
+                            <button class="category-btn" data-category="${cat}" onclick="switchMythologyCategory('${cat}')">
+                                ${data.mythologies[cat].name}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div id="mythologyContent"></div>
+                </div>
+            `;
+            page.innerHTML = html;
+            
+            // Show first category by default
+            if (categories.length > 0) {
+                switchMythologyCategory(categories[0]);
+            }
+        }
+
+        function switchMythologyCategory(category) {
+            currentCategory = category;
+            const myth = data.mythologies[category];
+            const content = document.getElementById('mythologyContent');
+            
+            // Update active button
+            document.querySelectorAll('#mythologyPage .category-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.category === category);
+            });
+
+            // Render deities
+            content.innerHTML = `
+                <div class="category-grid">
+                    ${myth.deities.map((deity, i) => `
+                        <div class="category-card" onclick="viewEntity('mythology', '${category}', '${deity.id}')">
+                            <h3>${deity.name}</h3>
+                            <p class="overview">${deity.domain}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderReligionPage() {
+            const page = document.getElementById('religionPage');
+            const categories = Object.keys(data.religions);
+            
+            let html = `
+                <div class="section-page">
+                    <h1>Religions</h1>
+                    <p>World religions with millions of followers</p>
+                    <div class="category-switcher">
+                        ${categories.map(cat => `
+                            <button class="category-btn" data-category="${cat}" onclick="switchReligionCategory('${cat}')">
+                                ${data.religions[cat].name}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div id="religionContent"></div>
+                </div>
+            `;
+            page.innerHTML = html;
+            
+            if (categories.length > 0) {
+                switchReligionCategory(categories[0]);
+            }
+        }
+
+        function switchReligionCategory(category) {
+            currentCategory = category;
+            const rel = data.religions[category];
+            const content = document.getElementById('religionContent');
+            
+            document.querySelectorAll('#religionPage .category-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.category === category);
+            });
+
+            content.innerHTML = `
+                <div class="category-grid">
+                    ${rel.holyFigures.map((fig, i) => `
+                        <div class="category-card" onclick="viewEntity('religion', '${category}', '${fig.id || fig.name}')">
+                            <h3>${fig.name}</h3>
+                            <p class="overview">${fig.role}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderWorldviewPage() {
+            const page = document.getElementById('worldviewPage');
+            const categories = Object.keys(data.worldviews);
+            
+            let html = `
+                <div class="section-page">
+                    <h1>Worldviews & Philosophies</h1>
+                    <p>Philosophical frameworks for understanding reality</p>
+                    <div class="category-switcher">
+                        ${categories.map(cat => `
+                            <button class="category-btn" data-category="${cat}" onclick="switchWorldviewCategory('${cat}')">
+                                ${data.worldviews[cat].name}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div id="worldviewContent"></div>
+                </div>
+            `;
+            page.innerHTML = html;
+            
+            if (categories.length > 0) {
+                switchWorldviewCategory(categories[0]);
+            }
+        }
+
+        function switchWorldviewCategory(category) {
+            currentCategory = category;
+            const wv = data.worldviews[category];
+            const content = document.getElementById('worldviewContent');
+            
+            document.querySelectorAll('#worldviewPage .category-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.category === category);
+            });
+
+            content.innerHTML = `
+                <div class="category-grid">
+                    ${wv.figures.map((fig, i) => `
+                        <div class="category-card" onclick="viewEntity('worldview', '${category}', '${fig.id || fig.name}')">
+                            <h3>${fig.name}</h3>
+                            <p class="overview">${fig.role}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        function renderSpiritualityPage() {
+            const page = document.getElementById('spiritualityPage');
+            const categories = Object.keys(data.spirituality);
+            
+            let html = `
+                <div class="section-page">
+                    <h1>Spiritual Practices</h1>
+                    <p>Spiritual practices and belief systems</p>
+                    <div class="category-switcher">
+                        ${categories.map(cat => `
+                            <button class="category-btn" data-category="${cat}" onclick="switchSpiritualityCategory('${cat}')">
+                                ${data.spirituality[cat].name}
+                            </button>
+                        `).join('')}
+                    </div>
+                    <div id="spiritualityContent"></div>
+                </div>
+            `;
+            page.innerHTML = html;
+            
+            if (categories.length > 0) {
+                switchSpiritualityCategory(categories[0]);
+            }
+        }
+
+        function switchSpiritualityCategory(category) {
+            currentCategory = category;
+            const spirit = data.spirituality[category];
+            const content = document.getElementById('spiritualityContent');
+            
+            document.querySelectorAll('#spiritualityPage .category-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.category === category);
+            });
+
+            content.innerHTML = `
+                <div class="category-grid">
+                    ${(spirit.figures || []).map((fig, i) => `
+                        <div class="category-card" onclick="viewEntity('spirituality', '${category}', '${fig.id || fig.name}')">
+                            <h3>${fig.name}</h3>
+                            <p class="overview">${fig.role}</p>
+                        </div>
+                    `).join('')}
+                </div>
+            `;
+        }
+
+        // ==================== NAVIGATION ====================
+        function goHome() {
+            currentSection = null;
+            currentCategory = null;
+            currentEntity = null;
+            showPage('homePage');
+            updateNavTabs();
+        }
+
+        function goToSection(section) {
+            currentSection = section;
+            currentCategory = null;
+            currentEntity = null;
+            
+            const pageMap = {
+                'mythology': 'mythologyPage',
+                'religion': 'religionPage',
+                'worldview': 'worldviewPage',
+                'spirituality': 'spiritualityPage'
+            };
+            
+            showPage(pageMap[section]);
+            updateNavTabs();
+        }
+
+        function viewEntity(section, category, id) {
+            currentSection = section;
+            currentCategory = category;
+            currentEntity = null;
+
+            let entity = null;
+
+            if (section === 'mythology') {
+                entity = allDeities[id];
+            } else if (section === 'religion') {
+                const rel = data.religions[category];
+                entity = rel.holyFigures.find(f => f.id === id || f.name === id);
+            } else if (section === 'worldview') {
+                const wv = data.worldviews[category];
+                entity = wv.figures.find(f => f.id === id || f.name === id);
+            } else if (section === 'spirituality') {
+                const spirit = data.spirituality[category];
+                entity = (spirit.figures || []).find(f => f.id === id || f.name === id);
+            }
+
+            if (!entity) {
+                console.error('Entity not found:', section, category, id);
+                return;
+            }
+
+            currentEntity = entity;
+            renderDetailPage();
+            showPage('detailPage');
+            updateNavTabs();
+        }
+
+        // ==================== DETAIL PAGE ====================
+        function renderDetailPage() {
+            const page = document.getElementById('detailPage');
+            const entity = currentEntity;
+
+            let html = `
+                <div class="detail-page">
+                    <div class="detail-header">
+                        <h1>${entity.name}</h1>
+                        <p>${entity.role || entity.domain || 'Entity'}</p>
+                    </div>
+                    <div class="detail-content">
+            `;
+
+            // Render sections based on available data
+            if (entity.significance) {
+                html += createCollapsibleSection('Significance', entity.significance);
+            }
+
+            if (entity.domain) {
+                html += createCollapsibleSection('Domain', entity.domain);
+            }
+
+            if (entity.powers) {
+                html += createCollapsibleSection('Powers & Abilities', entity.powers);
+            }
+
+            if (entity.relationships) {
+                html += createCollapsibleSection('Relationships', entity.relationships);
+            }
+
+            if (entity.symbols) {
+                const symbols = typeof entity.symbols === 'string' ? entity.symbols : entity.symbols.join(', ');
+                html += createCollapsibleSection('Symbols', symbols);
+            }
+
+            if (entity.temples) {
+                const temples = typeof entity.temples === 'string' ? entity.temples : entity.temples.join(', ');
+                html += createCollapsibleSection('Temples', temples);
+            }
+
+            if (entity.impact) {
+                html += createCollapsibleSection('Impact & Influence', entity.impact);
+            }
+
+            html += `
+                    </div>
+                </div>
+            `;
+
+            page.innerHTML = html;
+
+            // Add click handlers to collapsible sections
+            setTimeout(() => {
+                document.querySelectorAll('.collapsible-header').forEach(header => {
+                    header.addEventListener('click', toggleSection);
+                });
+            }, 0);
+        }
+
+        function createCollapsibleSection(title, content) {
+            return `
+                <div style="grid-column: 1 / -1;">
+                    <button class="collapsible-header">
+                        <span>${title}</span>
+                        <span class="toggle-icon">▼</span>
+                    </button>
+                    <div class="collapsible-content active">
+                        <div class="detail-section">
+                            <p>${content}</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function toggleSection(e) {
+            const header = e.currentTarget;
+            const content = header.nextElementSibling;
+            
+            header.classList.toggle('collapsed');
+            content.classList.toggle('active');
+        }
+
+        // ==================== UI UTILITIES ====================
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            document.getElementById(pageId).classList.add('active');
+        }
+
+        function updateNavTabs() {
+            const tabMap = {
+                'mythology': 0,
+                'religion': 1,
+                'worldview': 2,
+                'spirituality': 3
+            };
+
+            document.querySelectorAll('.nav-tab').forEach((tab, index) => {
+                if (currentSection && tabMap[currentSection] === index) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+        }
+
+        // ==================== INITIALIZATION ====================
+        document.addEventListener('DOMContentLoaded', () => {
+            loadData();
+        });
+    </script>
+</body>
+</html>
